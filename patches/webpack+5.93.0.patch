@@ -1,0 +1,26 @@
+diff --git a/node_modules/webpack/lib/javascript/ArrayPushCallbackChunkFormatPlugin.js b/node_modules/webpack/lib/javascript/ArrayPushCallbackChunkFormatPlugin.js
+index a3973e4..2cbdaa0 100644
+--- a/node_modules/webpack/lib/javascript/ArrayPushCallbackChunkFormatPlugin.js
++++ b/node_modules/webpack/lib/javascript/ArrayPushCallbackChunkFormatPlugin.js
+@@ -52,7 +52,7 @@ class ArrayPushCallbackChunkFormatPlugin {
+ 							chunkGraph.getChunkRuntimeModulesInOrder(chunk);
+ 						if (hotUpdateChunk) {
+ 							const hotUpdateGlobal =
+-								runtimeTemplate.outputOptions.hotUpdateGlobal;
++								runtimeTemplate.outputOptions.hotUpdateGlobal + "-" + chunk.id;
+ 							source.add(
+ 								`${globalObject}[${JSON.stringify(hotUpdateGlobal)}](`
+ 							);
+diff --git a/node_modules/webpack/lib/web/JsonpChunkLoadingRuntimeModule.js b/node_modules/webpack/lib/web/JsonpChunkLoadingRuntimeModule.js
+index 278d1fb..11240fd 100644
+--- a/node_modules/webpack/lib/web/JsonpChunkLoadingRuntimeModule.js
++++ b/node_modules/webpack/lib/web/JsonpChunkLoadingRuntimeModule.js
+@@ -338,7 +338,7 @@ class JsonpChunkLoadingRuntimeModule extends RuntimeModule {
+ 						"}",
+ 						"",
+ 						`${globalObject}[${JSON.stringify(
+-							hotUpdateGlobal
++							hotUpdateGlobal + "-" + chunk.id
+ 						)}] = ${runtimeTemplate.basicFunction(
+ 							"chunkId, moreModules, runtime",
+ 							[
